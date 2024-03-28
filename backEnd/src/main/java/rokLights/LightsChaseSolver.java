@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class LightsChaser {
+public class LightsChaseSolver {
     Dictionary<String, int[]> lookupDict= new Hashtable<>();
-    public LightsChaser() {
+    public LightsChaseSolver() {
         // No solution states
         lookupDict.put("1000", new int[]{});
         lookupDict.put("11000", new int[]{});
@@ -55,30 +55,38 @@ public class LightsChaser {
             flipAtLocation(matrix, row, location);
         }
     }
-    public int[][] chaseLights(int[][] matrix) {
+
+    // Chasing lights solve method
+    // Only works for 4x4 and 5x5 as other lookup dictionaries are not readily available
+    public Game chaseLights(Game game) {
+        int[][] matrix = game.getMatrix();
         int[][] solveMatrix = new int[matrix.length][matrix[0].length];
         for (int y = 0; y < matrix.length; y++) {
-            if (y != matrix.length - 1) { // Normal row
+            if (y != matrix.length - 1) { // Normal rows
                 for (int x = 0; x < matrix.length; x++) {
-                    if (matrix[y][x] == 1) {
+                    if (matrix[y][x] == 0) {
                         flipAtLocation(matrix, y + 1, x);
                         solveMatrix[y + 1][x] = 1;
                     }
                 }
             } else { // Last row
-                if (!(contains(matrix[y], 1))) {
-                    System.out.println("Solved!");
+                if (!(contains(matrix[y], 0))) {
+                    game.setSolvable(true);
+                    game.setSolution(solveMatrix);
                 } else {
                     String arrayString = convertToString(matrix[y]);
                     int[] toBeClicked = lookupDict.get(arrayString);
                     if (toBeClicked == null) {
-                        System.out.println("Unsolvable");
+                        game.setSolvable(false);
                     } else {
-                        clickMultiple(matrix, toBeClicked, 0);
+                        int[][] originalMatrix = game.getMatrix();
+                        clickMultiple(originalMatrix, toBeClicked, 0);
+                        game.setMatrix(originalMatrix);
+                        chaseLights(game);
                     }
                 }
             }
         }
-        return solveMatrix;
+        return game;
     }
 }
