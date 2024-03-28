@@ -1,6 +1,5 @@
 package rokLights;
 
-import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -50,9 +49,9 @@ public class LightsChaseSolver {
         }
         return stringBuilder.toString();
     }
-    private void clickMultiple(int[][] matrix, int[] locations, int row) {
+    private void clickMultipleAtTop(int[][] matrix, int[] locations) {
         for (int location : locations) {
-            flipAtLocation(matrix, row, location);
+            flipAtLocation(matrix, 0, location);
         }
     }
 
@@ -80,7 +79,7 @@ public class LightsChaseSolver {
                         game.setSolvable(false);
                     } else {
                         int[][] originalMatrix = game.getMatrix();
-                        clickMultiple(originalMatrix, toBeClicked, 0);
+                        clickMultipleAtTop(originalMatrix, toBeClicked);
                         game.setMatrix(originalMatrix);
                         chaseLights(game);
                     }
