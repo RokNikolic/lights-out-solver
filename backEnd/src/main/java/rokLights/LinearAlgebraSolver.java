@@ -1,18 +1,10 @@
 package rokLights;
 
+import java.util.Arrays;
+
+import static java.lang.Math.sqrt;
+
 public class LinearAlgebraSolver {
-    private int[][] addMatrixMod2 (int[][] matrix1, int[][] matrix2) {
-        int[][] sum  = new int[matrix1.length][matrix1[0].length];
-        if ((matrix1.length != matrix2.length) || (matrix1[0].length != matrix2[0].length)) {
-            throw new RuntimeException("Non  equal matrix sizes.");
-        }
-        for(int i = 0; i < matrix1.length; i++) {
-            for (int j = 0; j < matrix1[0].length; j++) {
-                sum[i][j] = (matrix1[i][j] + matrix2[i][j]) % 2;
-            }
-        }
-        return sum;
-    }
     public int[] unrollIntMatrix (int[][] matrix) {
         int[] vector = new int[matrix.length*matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
@@ -20,18 +12,14 @@ public class LinearAlgebraSolver {
         }
         return vector;
     }
-    private int[] addVectorMod2 (int[] vector1, int[] vector2) {
-        int[] sum  = new int[vector1.length];
-        if (vector1.length != vector2.length) {
-            throw new RuntimeException("Non  equal vector sizes.");
+    public int[][] rollIntToSquareMatrix (int[] vector) {
+        int[][] matrix = new int[(int) sqrt(vector.length)][(int) sqrt(vector.length)];
+        for (int i = 0; i < matrix.length; i++) {
+            System.arraycopy(vector, i*matrix[i].length, matrix[i], 0, matrix[i].length);
         }
-        for(int i = 0; i < vector1.length; i++) {
-            sum[i] = (vector1[i] + vector2[i]) % 2;
-
-        }
-        return sum;
+        return matrix;
     }
-    public int[][] generateChangeMatrix(int size) {
+    public int[][] generateTransformationMatrix(int size) {
         int[][] changeMatrix  = new int[size*size][size*size];
         for(int i = 0; i < (size*size); i++) {
             // Diagonal
@@ -50,6 +38,15 @@ public class LinearAlgebraSolver {
         return changeMatrix;
     }
     public void solve(Game game) {
-
+        Mod2Algebra mod2Algebra = new Mod2Algebra();
+        int[][] matrix = game.getMatrix();
+        int[] initialSetup = unrollIntMatrix(matrix);
+        int[] desiredEnding = new int[matrix.length * matrix.length];
+        Arrays.fill(desiredEnding, 1); // 1 for all lights on, 0 for all off
+        int[] difference = mod2Algebra.addVectorsMod2(desiredEnding, initialSetup);
+        int[][] transformMatrix = generateTransformationMatrix(matrix.length);
+        //int[][] invertedMatrix = mod2Algebra.GaussJordanElimination(transformMatrix, 2);
+        //int[] strategy = mod2Algebra.multiplyMatrixAndVectorModN(invertedMatrix, difference, 2);
+        //System.out.println(Arrays.toString(strategy));
     }
 }
