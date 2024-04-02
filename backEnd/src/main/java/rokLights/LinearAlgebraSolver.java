@@ -48,8 +48,13 @@ public class LinearAlgebraSolver {
         int[] difference = mod2Algebra.addVectorsMod2(desiredEnding, initialSetup);
         int[][] transformMatrix = generateTransformationMatrix(matrix.length);
         int[][] invertedMatrix = mod2Algebra.inverse(transformMatrix);
-        int[] strategy = mod2Algebra.multiplyMatrixAndVectorMod2(invertedMatrix, difference);
-        int[][] strategySquare = rollIntToSquareMatrix(strategy);
-        game.setSolution(strategySquare);
+        if (invertedMatrix.length == 0) {
+            game.setSolvable(false);
+        } else {
+            game.setSolvable(true);
+            int[] strategy = mod2Algebra.multiplyMatrixAndVectorMod2(invertedMatrix, difference);
+            int[][] strategySquare = rollIntToSquareMatrix(strategy);
+            game.setSolution(strategySquare);
+        }
     }
 }

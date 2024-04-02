@@ -78,15 +78,21 @@ public class Mod2Algebra {
                 if ((j == i) || matrix[j][i] == 0)
                     continue;
                 matrix[j] = addVectorsMod2(matrix[j], matrix[i]);
-                }
             }
         }
+    }
     public int[][] inverse(int[][] matrix) {
+        if (matrix.length != matrix[0].length) {
+            throw new RuntimeException("Matrix not square.");
+        }
         int[][] identity = makeIdentity(matrix.length);
         int[][] combined = extendMatrix(matrix, identity);
         gaussJordanEliminationMod2(combined);
         int[][][] leftAndRight = splitMatrixInHalf(combined);
-        //for (int[] row : leftAndRight[0]) System.out.println(Arrays.toString(row));
-        return leftAndRight[1];
+        if (Arrays.deepEquals(leftAndRight[0], identity)) {
+            return leftAndRight[1];
+        } else {
+            return new int[][] {{}};
+        }
     }
 }
