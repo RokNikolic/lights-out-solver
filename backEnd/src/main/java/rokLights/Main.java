@@ -16,15 +16,24 @@ public class Main {
         Game game = new Game();
         game.setMatrix(S4);
         linSolver.solve(game);
+        for (int[] row : game.getSolution()) System.out.println(Arrays.toString(row));
 
         int[][] test1 = {{1, 1, 1, 0}, {1, 1, 0, 1}, {1, 0, 1, 1}, {0, 1, 1, 1}};
         int[] test2 = {1, 0, 0, 1};
         int[] test4 = {0, 1, 1, 0};
-        int[] test = mod2Algebra.multiplyMatrixAndVectorModN(test1, test2, 2);
+        int[] test = mod2Algebra.multiplyMatrixAndVectorMod2(test1, test2);
         int[] test3 = mod2Algebra.addVectorsMod2(test, test4);
-        System.out.println(Arrays.toString(test));
 
-        //for (int[] row : change) System.out.println(Arrays.toString(row));
+        mod2Algebra.swapRows(test1, 1, 3);
+
+        System.out.println("........Gauss..........");
+        int[][] transformMatrix = linSolver.generateTransformationMatrix(3);
+        mod2Algebra.gaussJordanEliminationMod2(transformMatrix);
+        for (int[] row : transformMatrix) System.out.println(Arrays.toString(row));
+
+        System.out.println("........Extend..........");
+        int[][] testExtended = mod2Algebra.extendMatrix(S4, notS4);
+        for (int[] row : testExtended) System.out.println(Arrays.toString(row));
 
     }
 }

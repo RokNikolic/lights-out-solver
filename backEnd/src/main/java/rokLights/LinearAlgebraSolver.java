@@ -5,14 +5,14 @@ import java.util.Arrays;
 import static java.lang.Math.sqrt;
 
 public class LinearAlgebraSolver {
-    public int[] unrollIntMatrix (int[][] matrix) {
+    public int[] unrollIntMatrix(int[][] matrix) {
         int[] vector = new int[matrix.length*matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             System.arraycopy(matrix[i], 0, vector, i*matrix[i].length, matrix[i].length);
         }
         return vector;
     }
-    public int[][] rollIntToSquareMatrix (int[] vector) {
+    public int[][] rollIntToSquareMatrix(int[] vector) {
         int[][] matrix = new int[(int) sqrt(vector.length)][(int) sqrt(vector.length)];
         for (int i = 0; i < matrix.length; i++) {
             System.arraycopy(vector, i*matrix[i].length, matrix[i], 0, matrix[i].length);
@@ -39,14 +39,17 @@ public class LinearAlgebraSolver {
     }
     public void solve(Game game) {
         Mod2Algebra mod2Algebra = new Mod2Algebra();
+        // Setup
         int[][] matrix = game.getMatrix();
         int[] initialSetup = unrollIntMatrix(matrix);
         int[] desiredEnding = new int[matrix.length * matrix.length];
         Arrays.fill(desiredEnding, 1); // 1 for all lights on, 0 for all off
+        // Algorithm
         int[] difference = mod2Algebra.addVectorsMod2(desiredEnding, initialSetup);
         int[][] transformMatrix = generateTransformationMatrix(matrix.length);
-        //int[][] invertedMatrix = mod2Algebra.GaussJordanElimination(transformMatrix, 2);
-        //int[] strategy = mod2Algebra.multiplyMatrixAndVectorModN(invertedMatrix, difference, 2);
-        //System.out.println(Arrays.toString(strategy));
+        int[][] invertedMatrix = mod2Algebra.inverse(transformMatrix);
+        int[] strategy = mod2Algebra.multiplyMatrixAndVectorMod2(invertedMatrix, difference);
+        int[][] strategySquare = rollIntToSquareMatrix(strategy);
+        game.setSolution(strategySquare);
     }
 }
