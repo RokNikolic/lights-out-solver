@@ -69,10 +69,6 @@ public class Mod2Algebra {
                     }
                 }
             }
-            // More than 1 solution, we pick 1
-            if (matrix[i][i] == 0) {
-                matrix[i][i] = 1;
-            }
             // Elimination of rows to 0
             for (int j = 0; j < numOfRows; j++) {
                 if ((j == i) || matrix[j][i] == 0)
@@ -89,10 +85,6 @@ public class Mod2Algebra {
         int[][] combined = extendMatrix(matrix, identity);
         gaussJordanEliminationMod2(combined);
         int[][][] leftAndRight = splitMatrixInHalf(combined);
-        if (Arrays.deepEquals(leftAndRight[0], identity)) {
-            return leftAndRight[1];
-        } else {
-            return new int[][] {{}};
-        }
+        return leftAndRight[1];
     }
 }

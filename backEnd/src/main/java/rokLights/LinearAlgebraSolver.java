@@ -5,6 +5,7 @@ import java.util.Arrays;
 import static java.lang.Math.sqrt;
 
 public class LinearAlgebraSolver {
+    Mod2Algebra mod2Algebra = new Mod2Algebra();
     public int[] unrollIntMatrix(int[][] matrix) {
         int[] vector = new int[matrix.length*matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
@@ -37,22 +38,29 @@ public class LinearAlgebraSolver {
         }
         return changeMatrix;
     }
+    public boolean testStrategy(int[][] transformMatrix, int[] difference,  int[] strategy) {
+        int[] tempVector = mod2Algebra.multiplyMatrixAndVectorMod2(transformMatrix, strategy);
+        return Arrays.equals(tempVector, difference);
+    }
     public void solve(Game game) {
-        Mod2Algebra mod2Algebra = new Mod2Algebra();
         // Setup
         int[][] matrix = game.getMatrix();
+        if (matrix.length < 2) {
+            game.setSolvable(false);
+            return;
+        }
         int[] initialSetup = unrollIntMatrix(matrix);
-        int[] desiredEnding = new int[matrix.length * matrix.length];
+        int[] desiredEnding = new int[matrix.length * matrix[0].length];
         Arrays.fill(desiredEnding, 1); // 1 for all lights on, 0 for all off
         // Algorithm
         int[] difference = mod2Algebra.addVectorsMod2(desiredEnding, initialSetup);
         int[][] transformMatrix = generateTransformationMatrix(matrix.length);
         int[][] invertedMatrix = mod2Algebra.inverse(transformMatrix);
-        if (invertedMatrix.length == 0) {
-            game.setSolvable(false);
-        } else {
-            game.setSolvable(true);
-            int[] strategy = mod2Algebra.multiplyMatrixAndVectorMod2(invertedMatrix, difference);
+        int[] strategy = mod2Algebra.multiplyMatrixAndVectorMod2(invertedMatrix, difference);
+        // Test strategy
+        boolean solvable = testStrategy(transformMatrix, difference, strategy);
+        game.setSolvable(solvable);
+        if (solvable) {
             int[][] strategySquare = rollIntToSquareMatrix(strategy);
             game.setSolution(strategySquare);
         }

@@ -5,9 +5,9 @@ public class Game {
     private boolean solvable;
     private int[][] solution;
     public Game() {
-        this.matrix = new int[][]{{}};
+        this.matrix = new int[][]{};
         this.solvable = false;
-        this.solution = new int[][]{{}};
+        this.solution = new int[][]{};
     }
     public void setMatrix(int[][] matrix) {
         this.matrix = matrix;

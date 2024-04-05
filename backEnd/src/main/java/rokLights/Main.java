@@ -7,7 +7,7 @@ public class Main {
         LinearAlgebraSolver linSolver = new LinearAlgebraSolver();
         Mod2Algebra mod2Algebra = new Mod2Algebra();
 
-        int[][] non = {{}};
+        int[][] S3 = {{1, 1, 0}, {1, 0, 0}, {0, 1, 0}};
         int[][] S4 = {{1, 1, 0, 0}, {0, 0, 0, 1}, {1, 1, 1, 1}, {1, 0, 0, 1}};
         int[][] notS4 = {{0, 1, 1, 0}, {1, 1, 1, 1}, {1, 0, 1, 1}, {0, 0, 0, 0}};
         int[][] S5 = {{0, 1, 1, 0, 1}, {0, 0, 1, 0, 0}, {1, 0, 0, 0, 1}, {1, 1, 0, 0, 0}, {0, 0, 1, 1, 1}};
@@ -16,6 +16,7 @@ public class Main {
         Game game = new Game();
         game.setMatrix(S4);
         linSolver.solve(game);
+        System.out.println(game.getSolvable());
         for (int[] row : game.getSolution()) System.out.println(Arrays.toString(row));
 
         int[][] test1 = {{1, 1, 1, 0}, {1, 1, 0, 1}, {1, 0, 1, 1}, {0, 1, 1, 1}};
@@ -34,6 +35,5 @@ public class Main {
         System.out.println("........Extend..........");
         int[][] testExtended = mod2Algebra.extendMatrix(S4, notS4);
         for (int[] row : testExtended) System.out.println(Arrays.toString(row));
-
     }
 }
