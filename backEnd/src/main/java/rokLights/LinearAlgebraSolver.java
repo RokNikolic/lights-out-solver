@@ -54,7 +54,7 @@ public class LinearAlgebraSolver {
         // Algorithm
         int[] difference = mod2Algebra.addVectorsMod2(desiredEnding, initialSetup);
         int[][] transformMatrix = generateTransformationMatrix(matrix.length);
-        int[][] invertedMatrix = mod2Algebra.inverse(transformMatrix);
+        int[][] invertedMatrix = mod2Algebra.inverseMod2(transformMatrix);
         int[] strategy = mod2Algebra.multiplyMatrixAndVectorMod2(invertedMatrix, difference);
         // Test strategy
         boolean solvable = testStrategy(transformMatrix, difference, strategy);

@@ -8,7 +8,7 @@ public class Mod2Algebra {
     }
     public int[] multiplyMatrixAndVectorMod2(int[][] matrix, int[] vector) {
         if (matrix[0].length != vector.length) {
-            throw new RuntimeException("Wrong sizes.");
+            throw new IllegalArgumentException("Wrong sizes.");
         }
         int[] sum  = new int[vector.length];
         for (int i = 0; i < vector.length; i++) {
@@ -22,7 +22,7 @@ public class Mod2Algebra {
     }
     public int[] addVectorsMod2(int[] vector1, int[] vector2) {
         if (vector1.length != vector2.length) {
-            throw new RuntimeException("Non equal vector sizes.");
+            throw new IllegalArgumentException("Non equal vector sizes.");
         }
         int[] sum  = new int[vector1.length];
         for(int i = 0; i < vector1.length; i++) {
@@ -37,16 +37,19 @@ public class Mod2Algebra {
     }
     public int[][] extendMatrix(int[][] originalMatrix, int[][] extendingMatrix) {
         if (originalMatrix.length != extendingMatrix.length) {
-            throw new RuntimeException("Wrong  matrix heights.");
+            throw new IllegalArgumentException("Wrong matrix heights.");
         }
-        int[][] extended = new int[originalMatrix.length][originalMatrix.length+extendingMatrix.length];
+        int[][] extended = new int[originalMatrix.length][originalMatrix[0].length+extendingMatrix[0].length];
         for (int i = 0; i < originalMatrix.length; i++) {
-            System.arraycopy(originalMatrix[i], 0, extended[i], 0, originalMatrix.length);
-            System.arraycopy(extendingMatrix[i], 0, extended[i], originalMatrix.length, extendingMatrix.length);
+            System.arraycopy(originalMatrix[i], 0, extended[i], 0, originalMatrix[0].length);
+            System.arraycopy(extendingMatrix[i], 0, extended[i], originalMatrix[0].length, extendingMatrix[0].length);
         }
         return extended;
     }
     public int[][][] splitMatrixInHalf(int[][] matrix) {
+        if (matrix.length*2 != matrix[0].length) {
+            throw new IllegalArgumentException("Matrix should be 2x wide as it is high.");
+        }
         int[][] left = new int[matrix.length][matrix.length];
         int[][] right = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; i++) {
@@ -75,9 +78,9 @@ public class Mod2Algebra {
             }
         }
     }
-    public int[][] inverse(int[][] matrix) {
-        if (matrix.length != matrix[0].length) {
-            throw new RuntimeException("Matrix not square.");
+    public int[][] inverseMod2(int[][] matrix) {
+        if (matrix.length < 2) {
+            return new int[][] {};
         }
         int[][] identity = makeIdentity(matrix.length);
         int[][] combined = extendMatrix(matrix, identity);
