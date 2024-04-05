@@ -46,7 +46,6 @@ public class LinearAlgebraSolver {
         // Setup
         int[][] matrix = game.getMatrix();
         if (matrix.length < 2) {
-            game.setSolvable(false);
             return;
         }
         int[] initialSetup = unrollIntMatrix(matrix);

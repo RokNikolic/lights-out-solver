@@ -1,7 +1,5 @@
 package rokLights;
 
-import java.util.Arrays;
-
 public class Mod2Algebra {
     public int[][] makeIdentity(int size) {
         int[][] matrix = new int[size][size];
