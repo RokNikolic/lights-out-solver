@@ -7,6 +7,9 @@ public class Mod2Algebra {
         return matrix;
     }
     public int[] multiplyMatrixAndVectorMod2(int[][] matrix, int[] vector) {
+        if (matrix.length < 1) {
+            throw new IllegalArgumentException("Matrix needs to be 2d");
+        }
         if (matrix[0].length != vector.length) {
             throw new IllegalArgumentException("Wrong sizes.");
         }
@@ -31,6 +34,9 @@ public class Mod2Algebra {
         return sum;
     }
     public void swapRows(int[][] matrix, int row1, int row2) {
+        if (matrix.length < 1) {
+            throw new IllegalArgumentException("Matrix needs to be 2d");
+        }
         int[] temp = matrix[row1];
         matrix[row1] = matrix[row2];
         matrix[row2] = temp;

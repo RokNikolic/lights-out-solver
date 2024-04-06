@@ -58,8 +58,15 @@ class Mod2AlgebraTest {
         assertArrayEquals(returnedMatrix, expectedMatrix);
     }
     @Test
-    void multiplyMatrixAndVectorMod2Error() {
+    void multiplyMatrixAndVectorMod2ErrorSize() {
         int[][] matrix = {{1, 1, 1, 0}, {1, 1, 0, 1}, {1, 0, 1, 1}, {0, 1, 1, 1}};
+        int[] vector = {1, 0, 0};
+        assertThrows(IllegalArgumentException.class,
+                () -> mod2Algebra.multiplyMatrixAndVectorMod2(matrix, vector));
+    }
+    @Test
+    void multiplyMatrixAndVectorMod2Error2D() {
+        int[][] matrix = {};
         int[] vector = {1, 0, 0};
         assertThrows(IllegalArgumentException.class,
                 () -> mod2Algebra.multiplyMatrixAndVectorMod2(matrix, vector));

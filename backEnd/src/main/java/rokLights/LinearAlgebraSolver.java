@@ -7,14 +7,21 @@ import static java.lang.Math.sqrt;
 public class LinearAlgebraSolver {
     Mod2Algebra mod2Algebra = new Mod2Algebra();
     public int[] unrollIntMatrix(int[][] matrix) {
+        if (matrix.length < 1) {
+            throw new IllegalArgumentException("Matrix needs to be 2d");
+        }
         int[] vector = new int[matrix.length*matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             System.arraycopy(matrix[i], 0, vector, i*matrix[i].length, matrix[i].length);
         }
         return vector;
     }
-    public int[][] rollIntToSquareMatrix(int[] vector) {
-        int[][] matrix = new int[(int) sqrt(vector.length)][(int) sqrt(vector.length)];
+    public int[][] rollToSquareMatrix(int[] vector) {
+        double squareRoot = sqrt(vector.length);
+        if ((squareRoot - Math.floor(squareRoot)) != 0) {
+            throw new IllegalArgumentException("Vector has to be able to be square rooted");
+        }
+        int[][] matrix = new int[(int) squareRoot][(int) squareRoot];
         for (int i = 0; i < matrix.length; i++) {
             System.arraycopy(vector, i*matrix[i].length, matrix[i], 0, matrix[i].length);
         }
@@ -60,7 +67,7 @@ public class LinearAlgebraSolver {
         boolean solvable = testStrategy(transformMatrix, difference, strategy);
         game.setSolvable(solvable);
         if (solvable) {
-            int[][] strategySquare = rollIntToSquareMatrix(strategy);
+            int[][] strategySquare = rollToSquareMatrix(strategy);
             game.setSolution(strategySquare);
         }
     }
