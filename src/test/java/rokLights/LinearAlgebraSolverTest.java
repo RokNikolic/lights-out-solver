@@ -71,7 +71,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve3x3Num1() {
         int[][] solvable3 = {{1, 1, 0}, {1, 0, 0}, {0, 1, 0}};
-        game.setMatrix(solvable3);
+        game.setProblem(solvable3);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{1, 1, 0}, {0, 0, 0}, {1, 0, 1}};
@@ -80,7 +80,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve3x3Num2() {
         int[][] solvable = {{1, 1, 0}, {0, 1, 0}, {1, 1, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{0, 0, 0}, {0, 0, 1}, {1, 1, 0}};
@@ -89,7 +89,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve3x3Num3() {
         int[][] solvable = {{1, 1, 0}, {0, 0, 0}, {0, 0, 0}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{0, 0, 0}, {0, 0, 1}, {1, 0, 0}};
@@ -98,7 +98,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve4x4Num1() {
         int[][] solvable = {{1, 1, 0, 0}, {0, 0, 0, 1}, {1, 1, 1, 1}, {1, 0, 0, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{0, 1, 1, 1}, {1, 0, 0, 1}, {0, 1, 1, 0}, {0, 0, 0, 0}};
@@ -107,7 +107,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve4x4Num2() {
         int[][] solvable = {{1, 0, 0, 1}, {0, 1, 1, 0}, {0, 1, 1, 0}, {1, 0, 0, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{1, 1, 1, 1}, {0, 0, 0, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}};
@@ -116,7 +116,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve4x4Num3() {
         int[][] solvable = {{1, 0, 1, 1}, {0, 0, 1, 1}, {0, 0, 1, 1}, {1, 0, 1, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{1, 1, 1, 1}, {0, 0, 1, 0}, {0, 1, 0, 0}, {0, 0, 0, 0}};
@@ -125,21 +125,21 @@ class LinearAlgebraSolverTest {
     @Test
     void solve4x4NotSolvable1() {
         int[][] notSolvable = {{0, 1, 1, 0}, {1, 1, 1, 1}, {1, 0, 1, 1}, {0, 0, 0, 0}};
-        game.setMatrix(notSolvable);
+        game.setProblem(notSolvable);
         linSolver.solve(game);
         assertFalse(game.getSolvable());
     }
     @Test
     void solve4x4NotSolvable2() {
         int[][] notSolvable = {{0, 0, 1, 1}, {0, 1, 1, 0}, {0, 0, 0, 0}, {1, 0, 0, 0}};
-        game.setMatrix(notSolvable);
+        game.setProblem(notSolvable);
         linSolver.solve(game);
         assertFalse(game.getSolvable());
     }
     @Test
     void solve5x5Num1() {
         int[][] solvable = {{0, 1, 1, 0, 1}, {0, 0, 1, 0, 0}, {1, 0, 0, 0, 1}, {1, 1, 0, 0, 0}, {0, 0, 1, 1, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{0, 0, 0, 0, 0}, {1, 0, 0, 1, 0}, {0, 0, 1, 0, 0}, {1, 0, 0, 1, 0}, {1, 1, 1, 0, 0}};
@@ -148,7 +148,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve5x5Num2() {
         int[][] solvable = {{0, 1, 1, 0, 1}, {0, 0, 1, 0, 0}, {1, 1, 1, 1, 1}, {1, 1, 0, 0, 0}, {0, 0, 1, 1, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{1, 0, 0, 0, 1}, {0, 1, 0, 0, 1}, {1, 0, 1, 0, 1}, {1, 1, 1, 0, 0}, {1, 1, 0, 0, 0}};
@@ -157,7 +157,7 @@ class LinearAlgebraSolverTest {
     @Test
     void solve5x5Num3() {
         int[][] solvable = {{0, 1, 1, 0, 1}, {0, 1, 1, 1, 0}, {1, 1, 1, 1, 1}, {1, 1, 0, 0, 0}, {0, 0, 1, 1, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{1, 1, 1, 1, 1}, {1, 1, 1, 0, 0}, {0, 0, 1, 0, 0}, {1, 0, 0, 1, 0}, {1, 1, 1, 0, 0}};
@@ -166,21 +166,21 @@ class LinearAlgebraSolverTest {
     @Test
     void solve5x5NotSolvable1() {
         int[][] notSolvable = {{1, 0, 1, 1, 1}, {1, 1, 0, 0, 1}, {1, 0, 0, 0, 1}, {1, 0, 0, 0, 0}, {1, 1, 1, 1, 1}};
-        game.setMatrix(notSolvable);
+        game.setProblem(notSolvable);
         linSolver.solve(game);
         assertFalse(game.getSolvable());
     }
     @Test
     void solve5x5NotSolvable2() {
         int[][] notSolvable = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {1, 1, 1, 1, 1}};
-        game.setMatrix(notSolvable);
+        game.setProblem(notSolvable);
         linSolver.solve(game);
         assertFalse(game.getSolvable());
     }
     @Test
     void solve5x5NotSolvable3() {
         int[][] notSolvable = {{1, 1, 1, 1, 1}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
-        game.setMatrix(notSolvable);
+        game.setProblem(notSolvable);
         linSolver.solve(game);
         assertFalse(game.getSolvable());
     }
@@ -188,7 +188,7 @@ class LinearAlgebraSolverTest {
     void solve6x6Num1() {
         int[][] solvable = {{0, 0, 1, 1, 0, 0}, {0, 1, 1, 1, 0, 1}, {1, 1, 0, 1, 0, 1},
                 {1, 1, 0, 0, 0, 1}, {1, 1, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 0}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         int[][] generatedSolution = game.getSolution();
         int[][] expectedSolution = {{1, 1, 0, 1, 0, 0}, {1, 1, 0, 1, 0, 1}, {0, 1, 0, 0, 1, 1},
@@ -199,7 +199,7 @@ class LinearAlgebraSolverTest {
     void solve7x7Num1() {
         int[][] solvable = {{1, 0, 0, 0, 1, 0, 1}, {1, 1, 1, 1, 1, 0, 0}, {0, 0, 1, 0, 0, 0, 1},
                 {0, 0, 0, 0, 0, 1, 1}, {1, 0, 0, 0, 0, 1, 1}, {0, 1, 0, 1, 0, 0, 1}, {1, 0, 1, 0, 1, 1, 1}};
-        game.setMatrix(solvable);
+        game.setProblem(solvable);
         linSolver.solve(game);
         assertTrue(game.getSolvable());
     }

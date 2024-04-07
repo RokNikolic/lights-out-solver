@@ -1,19 +1,19 @@
 package rokLights;
 
 public class Game {
-    private int[][] matrix;
+    private int[][] problem;
     private boolean solvable;
     private int[][] solution;
     public Game() {
-        this.matrix = new int[][]{};
+        this.problem = new int[][]{};
         this.solvable = false;
         this.solution = new int[][]{};
     }
-    public void setMatrix(int[][] matrix) {
-        this.matrix = matrix;
+    public void setProblem(int[][] problem) {
+        this.problem = problem;
     }
-    public int[][] getMatrix() {
-        return matrix;
+    public int[][] getProblem() {
+        return problem;
     }
     public void setSolvable(boolean solvable) {
         this.solvable = solvable;

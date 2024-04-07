@@ -51,7 +51,7 @@ public class LinearAlgebraSolver {
     }
     public void solve(Game game) {
         // Setup
-        int[][] matrix = game.getMatrix();
+        int[][] matrix = game.getProblem();
         if (matrix.length < 2) {
             return;
         }

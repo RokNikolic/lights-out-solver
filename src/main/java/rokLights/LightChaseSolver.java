@@ -3,9 +3,9 @@ package rokLights;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class LightsChaseSolver {
+public class LightChaseSolver {
     Dictionary<String, int[]> lookupDict= new Hashtable<>();
-    public LightsChaseSolver() {
+    public LightChaseSolver() {
         // No solution states
         lookupDict.put("1000", new int[]{});
         lookupDict.put("11000", new int[]{});
@@ -58,7 +58,7 @@ public class LightsChaseSolver {
     // Chasing lights solve method
     // Only works for 4x4 and 5x5 as other lookup dictionaries are not readily available
     public Game chaseLights(Game game) {
-        int[][] matrix = game.getMatrix();
+        int[][] matrix = game.getProblem();
         int[][] solveMatrix = new int[matrix.length][matrix[0].length];
         for (int y = 0; y < matrix.length; y++) {
             if (y != matrix.length - 1) { // Normal rows
@@ -78,9 +78,9 @@ public class LightsChaseSolver {
                     if (toBeClicked == null) {
                         game.setSolvable(false);
                     } else {
-                        int[][] originalMatrix = game.getMatrix();
+                        int[][] originalMatrix = game.getProblem();
                         clickMultipleAtTop(originalMatrix, toBeClicked);
-                        game.setMatrix(originalMatrix);
+                        game.setProblem(originalMatrix);
                         chaseLights(game);
                     }
                 }
