@@ -3,9 +3,9 @@ package rokLights;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class LightsChaseSolver {
+public class LightChaseSolver {
     Dictionary<String, int[]> lookupDict= new Hashtable<>();
-    public LightsChaseSolver() {
+    public LightChaseSolver() {
         // No solution states
         lookupDict.put("1000", new int[]{});
         lookupDict.put("11000", new int[]{});
