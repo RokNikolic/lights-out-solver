@@ -1,7 +1,7 @@
-﻿## Lights out solver
+﻿## Lights out solvers
 
-- This is a **java 21** implementation of a solver for the puzzle game Lights out
-- Using both well known methods of:
+- This is a **java 21** implementation of two solvers for the puzzle game Lights out
+- These are using:
   - **linear algebra**
   - **lights chasing**
 
