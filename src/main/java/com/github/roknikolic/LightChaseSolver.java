@@ -1,4 +1,4 @@
-package rokLights;
+package com.github.roknikolic;
 
 import java.util.Dictionary;
 import java.util.Hashtable;

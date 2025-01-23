@@ -1,4 +1,4 @@
-package rokLights;
+package com.github.roknikolic;
 
 public class Game {
     private int[][] problem;

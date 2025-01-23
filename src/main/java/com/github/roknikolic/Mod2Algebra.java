@@ -1,4 +1,4 @@
-package rokLights;
+package com.github.roknikolic;
 
 public class Mod2Algebra {
     public int[][] makeIdentity(int size) {

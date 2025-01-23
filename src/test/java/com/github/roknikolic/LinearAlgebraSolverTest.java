@@ -1,4 +1,4 @@
-package rokLights;
+package com.github.roknikolic;
 
 import org.junit.jupiter.api.Test;
 
